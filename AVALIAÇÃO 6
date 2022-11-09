@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <title>6</title>
+</head>
+<style>
+    canvas {
+        border: 2px solid rgb(0, 0, 0);
+    }
+</style>
+
+<body>
+    <canvas width="800" height="800"></canvas>
+    <script>
+
+        const UpKey = 38, DownKey = 40, LeftKey = 37, RigthKey = 39;
+        var LeftMov = RigthMov = UpMov = DownMov = false;
+        const radius = 40, velocidade = 7;
+        var canvas = document.querySelector("canvas");
+        var atualiz = canvas.getContext("2d");
+        let ponto = {
+            x: 400,
+            y: 400
+        };
+
+        atualizacao();
+
+        window.addEventListener("keydown", keypress);
+
+        function renderizacao() {
+            atualiz.clearRect(0, 0, canvas.width, canvas.height);
+            ponto.x = Math.max(radius, Math.min(canvas.width - radius, ponto.x));
+            ponto.y = Math.max(radius, Math.min(canvas.height - radius, ponto.y));
+
+            atualiz.beginPath();
+            atualiz.arc(ponto.x, ponto.y, radius, 0, 2 * Math.PI,)
+            atualiz.fill();
+        }
+
+        function atualizacao() {
+            requestAnimationFrame(atualizacao, canvas);
+            renderizacao();
+            movimentacao();
+        }
+
+        function keypress(entrada) {
+            let chave = entrada.keyCode;
+
+            if (chave === LeftKey && chave !== RigthKey) {
+                LeftMov = true;
+            }
+            if (chave === RigthKey && chave !== LeftKey) {
+                RigthMov = true;
+            }
+            if (chave === UpKey && chave !== DownKey) {
+                UpMov = true;
+            }
+            if (chave === DownKey && chave !== UpKey) {
+                DownMov = true;
+            }
+        }
+
+        window.addEventListener("keyup", keyreleased);
+
+        function keyreleased(entrada) {
+            let chave = entrada.keyCode;
+
+            if (chave === LeftKey && chave !== RigthKey) {
+                LeftMov = false;
+            }
+            if (chave === RigthKey && chave !== LeftKey) {
+                RigthMov = false;
+            }
+            if (chave === UpKey && chave !== DownKey) {
+                UpMov = false;
+            }
+            if (chave === DownKey && chave !== UpKey) {
+                DownMov = false;
+            }
+        }
+
+        function movimentacao() {
+            if (LeftMov) {
+                ponto.x -= velocidade;
+            }
+            if (RigthMov) {
+                ponto.x += velocidade;
+            }
+            if (UpMov) {
+                ponto.y -= velocidade;
+            }
+            if (DownMov) {
+                ponto.y += velocidade;
+            }
+        }
+    </script>
+</body>
+
+</html>
