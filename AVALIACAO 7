@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Resposta 7</title>
+    <meta charset="utf-8">
+</head>
+<style>
+    canvas {
+        border: 2px solid rgb(0, 0, 0);
+        }
+</style>
+
+<body>
+    <canvas width="800" height="800"></canvas>
+    <script>
+
+        const UpKey = 38, DownKey = 40, LeftKey = 37, RigthKey = 39;
+        var LeftMov = RigthMov = UpMov = DownMov = false;
+        const cursorTam = 100, velocidade = 7;
+        var canvas = document.querySelector("canvas");
+        var atualiz = canvas.getContext("2d");
+        let ponto = {
+            x: 300,
+            y: 300
+        };
+
+        atualizacao();
+
+        window.addEventListener("keydown", teclapressionada);
+
+        function teclapressionada(entrada) {
+            let chave = entrada.keyCode;
+
+            if (chave === LeftKey && chave !== RigthKey) {
+                LeftMov = true;
+            }
+            if (chave === RigthKey && chave !== LeftKey) {
+                RigthMov = true;
+            }
+            if (chave === UpKey && chave !== DownKey) {
+                UpMov = true;
+            }
+            if (chave === DownKey && chave !== UpKey) {
+                DownMov = true;
+            }
+        }
+
+        window.addEventListener("keyup", teclaliberada);
+
+        function teclaliberada(entrada) {
+            let chave = entrada.keyCode;
+
+            if (chave === LeftKey && chave !== RigthKey) {
+                LeftMov = false;
+            }
+            if (chave === RigthKey && chave !== LeftKey) {
+                RigthMov = false;
+            }
+            if (chave === UpKey && chave !== DownKey) {
+                UpMov = false;
+            }
+            if (chave === DownKey && chave !== UpKey) {
+                DownMov = false;
+            }
+        }
+
+        function movimentacao() {
+            if (LeftMov) {
+                ponto.x -= velocidade;
+            }
+            if (RigthMov) {
+                ponto.x += velocidade;
+            }
+            if (UpMov) {
+                ponto.y -= velocidade;
+            }
+            if (DownMov) {
+                ponto.y += velocidade;
+            }
+        }
+
+        function renderizacao() {
+           
+            let cursor = new Image();
+            cursor.src = "GG.png.png";
+            cursor.addEventListener("load", () => {
+                atualiz.clearRect(0, 0, canvas.width, canvas.height);
+                ponto.x = Math.max(0, Math.min(canvas.width - cursorTam, ponto.x));
+                ponto.y = Math.max(0, Math.min(canvas.height - cursorTam, ponto.y));
+                atualiz.drawImage(cursor, ponto.x, ponto.y, cursorTam, cursorTam);
+            });
+
+
+        }
+
+        function atualizacao() {
+            requestAnimationFrame(atualizacao, canvas);
+            renderizacao();
+            movimentacao();
+
+        }
+    </script>
+</body>
+
+</html>
