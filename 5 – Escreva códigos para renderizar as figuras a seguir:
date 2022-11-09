@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="a1" width="300" height="250" style="border: 1px solid black">
+    </canvas>
+    <canvas id="a2" width="300" height="250" style="border: 1px solid black">
+    </canvas>
+    <canvas id="a3" width="300" height="250" style="border: 1px solid black">
+    </canvas>
+    <canvas id="b" width="600" height="300" style="border: 1px solid black">
+    </canvas>
+</body>
+
+<script>
+
+var canvas = document.getElementById("a1");
+var retangle = canvas.getContext("2d");
+var triangle = canvas.getContext("2d");
+
+retangle.beginPath();
+retangle.strokeStyle = "blue";
+retangle.strokeRect(50, 50, 200, 150);
+
+triangle.beginPath();
+triangle.moveTo(150, 75);
+triangle.lineTo(225, 150);
+triangle.lineTo(75, 150);
+triangle.fillStyle = "blue"
+triangle.fill();
+
+var canvas = document.getElementById("a2");
+var retangle = canvas.getContext("2d");
+var circle = canvas.getContext("2d");
+
+retangle.beginPath();
+retangle.fillStyle = "blue";
+retangle.fillRect(90, 60, 125, 125);
+
+circle.beginPath();
+circle.arc(150, 125, 100, 0, 2 * Math.PI);
+circle.strokeStyle = "blue";
+circle.stroke();
+
+var canvas = document.getElementById("a3");
+var triangle1 = canvas.getContext("2d");
+var triangle2 = canvas.getContext("2d");
+
+triangle1.beginPath();
+triangle1.moveTo(125, 75);
+triangle1.lineTo(175, 150);
+triangle1.lineTo(75, 150);
+triangle1.strokeStyle = "blue"
+triangle1.closePath();
+triangle1.stroke();
+
+triangle2.beginPath();
+triangle2.moveTo(175, 75);
+triangle2.lineTo(225, 150);
+triangle2.lineTo(125, 150);
+triangle2.strokeStyle = "blue"
+triangle2.closePath();
+triangle2.stroke();
+
+var canvas = document.getElementById('b');
+var ctx = canvas.getContext('2d');
+var triangle = canvas.getContext("2d");
+
+for(let i=0; i < 6; i++){
+    for(let j=0; j < 3; j++){
+        ctx.beginPath();
+        ctx.strokeStyle = "blue";
+        ctx.strokeRect(50*(i+i), 50*(j+j), 95, 95);
+        triangle.beginPath();
+        triangle.moveTo(47+(100*i), 25+(100*j));
+        triangle.lineTo(75+(100*i), 75+(100*j));
+        triangle.lineTo(20+(100*i), 75+(100*j));
+        triangle.fillStyle = "blue"
+        triangle.fill();
+    }
+  }
+
+
+</script>
+
+
+</html>
